@@ -9,13 +9,13 @@ function App() {
   const channelId = "tP5cIFvcA41bjHEh";
 
   const [member, setMember] = useState({
-    id: null,
-    name: randomName(),
+    // id: "1",
+    username: randomName(),
     color: randomColor(),
   });
   const [messages, setMessages] = useState([]);
-  const [lastMessage, setLastMessage] = useState({ text: "" });
-  const [drone, setDrone] = useState(null);
+  // const [lastMessage, setLastMessage] = useState({ text: "" });
+  const [drone, setDrone] = useState();
 
   useEffect(() => {
     console.log("Who am I?", member);
@@ -38,14 +38,12 @@ function App() {
 
     const room = drone.subscribe(roomName);
 
-    room.on("data", (data, sender) => {
-      data.sender = sender.clientData;
-
-      setMessages((messages) => [...messages, data]);
+    room.on("message", (message) => {
+      setMessages((prevState) => [...prevState, message]);
     });
 
     setDrone(drone);
-  }, [member]);
+  }, []);
 
   const handleSendMessage = (message) => {
     drone.publish({
@@ -54,57 +52,13 @@ function App() {
     });
   };
 
-  const handleChange = (e) => {
-    setLastMessage({ text: e.target.value });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    setLastMessage({ text: "" });
-    handleSendMessage(lastMessage);
-  };
-
   return (
     <div className='App'>
       <div className='App-header' style={{ minHeight: "200px" }}>
         <h1>My Chat App</h1>
       </div>
-
-      <ul className='Messages-list'>
-        {messages.map((message, index) => {
-          return (
-            <li
-              key={index}
-              className={
-                member.id === message.sender.id ? "sender" : "receiver"
-              }
-            >
-              <span
-                className='avatar'
-                style={{ backgroundColor: message.sender.color }}
-              />
-              <div className='Message-content'>
-                <div className='username'>{message.sender.name}</div>
-                <div className='text'>{message.text}</div>
-              </div>
-            </li>
-          );
-        })}
-      </ul>
-
-      <div className='Input'>
-        <form onSubmit={(e) => handleSubmit(e)}>
-          <input
-            onChange={(e) => handleChange(e)}
-            value={lastMessage.text}
-            type='text'
-            placeholder='Press ENTER to send'
-            autoFocus={true}
-          />
-          <button>Send</button>
-        </form>
-      </div>
+      <Messages messages={messages} currentMember={member} />
+      <Input onSendMessage={handleSendMessage} />
     </div>
   );
 }

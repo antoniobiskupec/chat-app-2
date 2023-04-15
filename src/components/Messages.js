@@ -1,8 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 
-function Messages(props) {
-  // props
-  const { messages, currentMember } = props;
+function Messages({ messages, currentMember }) {
+  useEffect(() => {}, []);
 
   // function that renders one message
   function renderMessage(message) {
@@ -18,7 +17,7 @@ function Messages(props) {
       : "Messages-message";
 
     return (
-      <li className={className} key={message.time}>
+      <li className={className} key={Math.random}>
         <span className='avatar' />
         <div className='Message-content'>
           <div className='username'>{member.clientData.username}</div>

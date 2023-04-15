@@ -15,14 +15,14 @@ function Input(props) {
   }
 
   return (
-    <div className='input'>
+    <div className='Input'>
       <form onSubmit={handleSubmit}>
         <input
           onChange={handleChange}
           value={text}
-          type={text}
+          type='text'
           placeholder='Press Enter to send'
-          autoFocus
+          autoFocus={true}
         />
         <button>Send</button>
       </form>
