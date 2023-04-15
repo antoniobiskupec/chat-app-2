@@ -43,7 +43,7 @@ function App() {
     });
 
     setDrone(drone);
-  }, []);
+  }, [member]);
 
   const handleSendMessage = (message) => {
     drone.publish({
