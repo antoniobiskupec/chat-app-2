@@ -46,13 +46,11 @@ function App() {
   }, [member]);
 
   const handleSendMessage = (message) => {
-    drone.publish({
-      room: roomName,
-      message,
-    });
-    if (message.trim() === "") {
-      // Display an error message or prevent sending the empty message
-      return;
+    if (message.trim() !== "") {
+      drone.publish({
+        room: roomName,
+        message,
+      });
     }
   };
 

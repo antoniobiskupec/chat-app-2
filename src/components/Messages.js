@@ -26,6 +26,7 @@ function Messages({ messages, currentMember }) {
           <div className='username'>{member.clientData.username}</div>
           <div
             className='text'
+            value=''
             style={{ backgroundColor: member.clientData.color }}
             ref={bottomRef}
           >
