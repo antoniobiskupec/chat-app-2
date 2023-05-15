@@ -50,6 +50,10 @@ function App() {
       room: roomName,
       message,
     });
+    if (message.trim() === "") {
+      // Display an error message or prevent sending the empty message
+      return;
+    }
   };
 
   return (

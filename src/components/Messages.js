@@ -24,7 +24,11 @@ function Messages({ messages, currentMember }) {
         />
         <div className='Message-content'>
           <div className='username'>{member.clientData.username}</div>
-          <div className='text' ref={bottomRef}>
+          <div
+            className='text'
+            style={{ backgroundColor: member.clientData.color }}
+            ref={bottomRef}
+          >
             {data}
           </div>
         </div>
