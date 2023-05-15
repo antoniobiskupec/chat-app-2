@@ -57,7 +57,7 @@ function App() {
   return (
     <div className='App'>
       <div className='App-header' style={{ minHeight: "200px" }}>
-        <h1>My Chat App</h1>
+        <h1>Chat App Antonio Biskupec</h1>
       </div>
       <Messages messages={messages} currentMember={member} />
       <Input onSendMessage={handleSendMessage} />
